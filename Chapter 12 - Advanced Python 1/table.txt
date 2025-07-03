@@ -1,0 +1,8 @@
+Multiplication table of given number 212 is :
+[212, 424, 636, 848, 1060, 1272, 1484, 1696, 1908, 2120]
+Multiplication table of given number 5 is :
+[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+Multiplication table of given number 4 is :
+[4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+Multiplication table of given number 67 is :
+[67, 134, 201, 268, 335, 402, 469, 536, 603, 670]
