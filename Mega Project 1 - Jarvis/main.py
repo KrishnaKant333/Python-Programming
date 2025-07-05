@@ -12,7 +12,8 @@ import musicLibrary
 # recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 
-def speak(text):
+def printAndSpeak(text):
+	print(text)
 	engine.say(text)
 	engine.runAndWait()
 
@@ -24,26 +25,38 @@ def processCommand(w):
 	if w.startswith("open"):
 		site = w.split(" ")[1]
 		if site in ["google" , "youtube" , "facebook" , "linkedin"]:
-				openSite(site)
-				return
-		speak("Sorry, I don't have the permission to open that site.")
+			txt = f"Opening {site}.."
+			printAndSpeak(txt)
+			openSite(site)
+			return
+		if site == "minecraft":
+			txt = "Opening Minecraft.."
+			printAndSpeak(txt)
+			webbrowser.open("https://aternos.org")
+			return
 
-	if w.startswith("play"):
+		printAndSpeak("Sorry, I don't have the permission to open that site.")
+
+	elif w.startswith("play"):
 		song = w.split(" ")[1]
 		if song in musicLibrary.music:
 			link = musicLibrary.music[song]
+			txt = f"Playing {link}.."
+			printAndSpeak(txt)
 			webbrowser.open(link)
-		speak("Sorry, that song is not in my Library.")
+			return
+		printAndSpeak("Sorry, that song is not in my Library.")
 
-	if w in ["bye", "quit", "end", "exit"]:
-		speak("Goodbye, shutting down..")
+	elif w in ["bye", "quit", "end", "exit"]:
+		txt = "Goodbye, shutting down.."
+		printAndSpeak(txt)
 		exit()
 
 	else:
-		speak("Sorry, I don't understand that command.")
+		printAndSpeak("Sorry, I don't understand that command.")
 
 if __name__ == "__main__":
-	speak("Initializing Jarvis...")
+	printAndSpeak("Initializing Jarvis...")
 	while True:
 		# Listen for the wake word "Jarvis"
 		# Obtain audio from microphone :
@@ -57,12 +70,11 @@ if __name__ == "__main__":
 				audio = r.listen(source, timeout=5, phrase_time_limit=4)
 			word = r.recognize_google(audio)
 			if (isinstance(word, str) and word.lower() == "jarvis"):
-				speak("Huh")
+				printAndSpeak("Yes!")
 				# Listen for command :
 				with sr.Microphone() as source:
-					r.adjust_for_ambient_noise(source, duration=1)
 					print("Jarvis is listening..")
-					audio = r.listen(source)
+					audio = r.listen(source, timeout=5, phrase_time_limit=4)
 					command = r.recognize_google(audio)
 
 					processCommand(command)
