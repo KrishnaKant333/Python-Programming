@@ -24,10 +24,6 @@ def openSite(c):
 def processCommand(w):
 	w = w.lower()
 
-	# if w
-
-
-
 	if w.startswith("open") or w.startswith("launch") or w.startswith("fire"):
 		name = w.split(" ")[1]
 		if name in ["google" , "youtube" , "facebook" , "linkedin", "github"]:
@@ -39,10 +35,6 @@ def processCommand(w):
 		if name == "notepad":
 			subprocess.Popen(["notepad.exe"])
 			printAndSpeak("Launching Notepad...")
-			return
-		elif name == "calculator":
-			subprocess.Popen(["calculator.exe"])
-			printAndSpeak("Launching Calculator...")
 			return
 		elif name == "code":
 			subprocess.Popen(["C:\\Users\\Krishna Kant\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"])
